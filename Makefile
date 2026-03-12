@@ -1,12 +1,16 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
-TARGET = my_program
-SRC = src/main.c src/worker.c
+# Makefile для проекта worker
 
-all: $(TARGET)
+build: main.o worker.o
+	gcc -o my_program main.o worker.o
 
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+run:
+	./my_program
 
 clean:
-	rm -f $(TARGET)
+	rm -f *.o my_program
+
+main.o: src/main.c
+	gcc -c src/main.c
+
+worker.o: src/worker.c
+	gcc -c src/worker.c
